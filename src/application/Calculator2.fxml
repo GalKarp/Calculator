@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane fx:id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#keboardListener" prefHeight="496.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/8.0.31" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Pane fx:id="textPane" layoutX="4.0" layoutY="30.0" prefHeight="98.0" prefWidth="617.0">
+      <children>
+        <TextField fx:id="mainText" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="4.0" layoutY="36.0" onAction="#mainTextEnterPressed" onKeyPressed="#keboardListener" prefHeight="34.0" prefWidth="609.0" />
+        <Label fx:id="secondText" alignment="CENTER_RIGHT" layoutX="13.0" layoutY="14.0" prefHeight="20.0" prefWidth="598.0" text="" />
+      </children>
+    </Pane>
+  <Label fx:id="calc" layoutX="285.0" layoutY="7.0" prefHeight="20.0" prefWidth="203.0" text="Calculator" />
+  <Button fx:id="closeBtn" layoutX="593.0" layoutY="2.0" minWidth="24.0" mnemonicParsing="false" onAction="#closeBtnHandler" prefHeight="23.000099999997474" prefWidth="31.0" text="X" />
+      <Button layoutX="319.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Undo" onAction="#undoBtnHandler" />
+<Button id="equalBtn" fx:id="equal" layoutX="259.0" layoutY="370.0" mnemonicParsing="false" onAction="#equalBtnHandler" prefHeight="110.0" prefWidth="50.0" text="=" />
+<Button id="btn9" fx:id="numInv" focusTraversable="false" layoutX="259.0" layoutY="310.0" mnemonicParsing="false" onAction="#numInvBtnHandler" prefHeight="51.0" prefWidth="50.0" text="1/x" />
+      <Button id="precentage" fx:id="numInv1" focusTraversable="false" layoutX="258.0" layoutY="249.0" mnemonicParsing="false" onAction="#numInvBtnHandler" prefHeight="50.000099999997474" prefWidth="50.0" text="\%" />
+  <Button id="powBtn" fx:id="sqrtBtn" focusTraversable="false" layoutX="258.0" layoutY="189.0" mnemonicParsing="false" onAction="#sqrtBtnHandler" prefHeight="50.0" prefWidth="50.0" text="√x" />
+<Button fx:id="plus" focusTraversable="false" layoutX="199.0" layoutY="429.0" mnemonicParsing="false" onAction="#plusHandler" prefHeight="51.0" prefWidth="50.0" text="+" />
+<Button fx:id="minus" focusTraversable="false" layoutX="199.0" layoutY="369.0" mnemonicParsing="false" onAction="#minusHandler" prefHeight="51.0" prefWidth="50.0" text="-" />
+<Button id="xBtn" fx:id="multiply" focusTraversable="false" layoutX="199.0" layoutY="310.0" mnemonicParsing="false" onAction="#multiplyHandler" prefHeight="50.0" prefWidth="50.0" text="X" />
+<Button fx:id="divide" focusTraversable="false" layoutX="198.0" layoutY="250.0" mnemonicParsing="false" onAction="#divideHandler" prefHeight="50.0" prefWidth="50.0" text="/" />
+<Button id="btn9" fx:id="plusMinus" focusTraversable="false" layoutX="198.0" layoutY="190.0" mnemonicParsing="false" onAction="#plusMinusHandler" prefHeight="50.0" prefWidth="50.0" text="+/-" />
+<Button id="btn9" fx:id="MPlus" focusTraversable="false" layoutX="198.0" layoutY="129.0" mnemonicParsing="false" onAction="#MPlusBtnHandler" prefHeight="50.0" prefWidth="50.0" text="M+" />
+<Button fx:id="CBtn" focusTraversable="false" layoutX="137.0" layoutY="191.0" mnemonicParsing="false" onAction="#CBtnHandler" prefHeight="50.0" prefWidth="50.0" text="C" />
+<Button id="btn9" fx:id="MRBtn" focusTraversable="false" layoutX="76.0" layoutY="130.0" mnemonicParsing="false" onAction="#MRBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MR" />
+<Button fx:id="btn9" focusTraversable="false" layoutX="137.0" layoutY="250.0" mnemonicParsing="false" onAction="#btn9Handler" prefHeight="50.0" prefWidth="50.0" text="9" />
+<Button fx:id="btn8" focusTraversable="false" layoutX="77.0" layoutY="251.0" mnemonicParsing="false" onAction="#btn8Handler" prefHeight="50.0" prefWidth="50.0" text="8" />
+<Button fx:id="btn6" focusTraversable="false" layoutX="139.0" layoutY="311.0" mnemonicParsing="false" onAction="#btn6Handler" prefHeight="50.0" prefWidth="50.0" text="6" />
+<Button fx:id="btn5" focusTraversable="false" layoutX="79.0" layoutY="312.0" mnemonicParsing="false" onAction="#btn5Handler" prefHeight="50.0" prefWidth="50.0" text="5" />
+<Button fx:id="btn3" focusTraversable="false" layoutX="139.0" layoutY="370.0" mnemonicParsing="false" onAction="#btn3Handler" prefHeight="50.0" prefWidth="50.0" text="3" />
+<Button fx:id="btnPunct" focusTraversable="false" layoutX="139.0" layoutY="430.0" mnemonicParsing="false" onAction="#btnPunctHandler" prefHeight="50.0" prefWidth="50.0" text="." />
+<Button fx:id="btn0" focusTraversable="false" layoutX="19.0" layoutY="431.0" mnemonicParsing="false" onAction="#btn0Handler" prefHeight="50.0" prefWidth="110.0" text="0" />
+<Button id="ACHandler" fx:id="ACBtn" focusTraversable="false" layoutX="76.0" layoutY="191.0" mnemonicParsing="false" onAction="#ACBtnHandler" prefHeight="50.0" prefWidth="50.0" text="AC" />
+<Button fx:id="btn2" focusTraversable="false" layoutX="79.0" layoutY="371.0" mnemonicParsing="false" onAction="#btn2Handler" prefHeight="50.0" prefWidth="50.0" text="2" />
+<Button fx:id="btn7" focusTraversable="false" layoutX="17.0" layoutY="252.0" mnemonicParsing="false" onAction="#btn7Handler" prefHeight="50.0" prefWidth="50.0" text="7" />
+<Button fx:id="btn1" focusTraversable="false" layoutX="19.0" layoutY="372.0" mnemonicParsing="false" onAction="#btn1Handler" prefHeight="50.0" prefWidth="50.0" text="1" />
+<Button fx:id="btn4" focusTraversable="false" layoutX="18.0" layoutY="313.0" mnemonicParsing="false" onAction="#btn4Handler" prefHeight="50.0" prefWidth="50.0" text="4" />
+  <Button fx:id="powBtn" focusTraversable="false" layoutX="508.0" layoutY="310.0" mnemonicParsing="false" onAction="#powBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^y" />
+  <Button id="powBtn" fx:id="factorialBtn" focusTraversable="false" layoutX="567.0" layoutY="251.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x!" />
+      <MenuButton layoutX="2.0" layoutY="2.0" mnemonicParsing="false" text="View">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Regular" onAction="#onRegular" />
+          <MenuItem mnemonicParsing="false" text="Scientific" onAction="#onScientific" />
+        </items>
+      </MenuButton>
+  <Button id="powBtn" fx:id="squareBtn" focusTraversable="false" layoutX="507.0" layoutY="251.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^2" />
+  <Button id="btn9" fx:id="PIBtn" focusTraversable="false" layoutX="320.0" layoutY="369.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="π" />
+  <Button id="trigBtn" fx:id="sinBtn" focusTraversable="false" layoutX="447.0" layoutY="251.0" mnemonicParsing="false" onAction="#sinBtnHandler" prefHeight="50.0" prefWidth="50.0" text="sin" />
+  <Button id="trigBtn" fx:id="cosBtn" focusTraversable="false" layoutX="448.0" layoutY="308.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="50.0" text="cos" />
+  <Button id="trigBtn" fx:id="tanBtn" focusTraversable="false" layoutX="448.0" layoutY="368.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="50.0" text="tan" />
+      <Button id="powBtn" fx:id="squareBtn1" focusTraversable="false" layoutX="508.0" layoutY="370.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^2" />
+      <Button fx:id="btn71" focusTraversable="false" layoutX="15.0" layoutY="191.0" mnemonicParsing="false" onAction="#btn7Handler" prefHeight="50.0" prefWidth="50.0" text="&lt;---" />
+      <Button id="trigBtn" fx:id="tanBtn1" focusTraversable="false" layoutX="447.0" layoutY="428.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Mod" />
+      <Button id="powBtn" fx:id="squareBtn11" focusTraversable="false" layoutX="508.0" layoutY="430.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="log" />
+      <Button id="powBtn" fx:id="factorialBtn1" focusTraversable="false" layoutX="568.0" layoutY="310.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="y√x" />
+      <Button id="powBtn" fx:id="factorialBtn11" focusTraversable="false" layoutX="568.0" layoutY="369.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="3√x" />
+      <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="10^x" />
+      <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
+      <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
+      <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />
+      <Button id="powBtn" fx:id="factorialBtn2" focusTraversable="false" layoutX="566.0" layoutY="192.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text=")" />
+      <Button id="powBtn" fx:id="factorialBtn21" focusTraversable="false" layoutX="505.0" layoutY="192.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="(" />
+      <Button id="powBtn" fx:id="factorialBtn211" focusTraversable="false" layoutX="447.0" layoutY="192.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="ln" />
+      <Button id="powBtn" fx:id="factorialBtn2111" focusTraversable="false" layoutX="379.0" layoutY="193.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Inv" />
+      <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="dms" />
+      <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
+      <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
+      <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="317.0" layoutY="127.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
+      <RadioButton layoutX="333.0" layoutY="143.0" mnemonicParsing="false" text="Degrees" />
+      <RadioButton layoutX="433.0" layoutY="144.0" mnemonicParsing="false" text="Radians" />
+      <RadioButton layoutX="544.0" layoutY="143.0" mnemonicParsing="false" text="Grads" />
+      <Button id="btn9" fx:id="MRBtn1" focusTraversable="false" layoutX="15.0" layoutY="131.0" mnemonicParsing="false" onAction="#MRBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MC" />
+      <Button id="btn9" fx:id="MRBtn2" focusTraversable="false" layoutX="137.0" layoutY="130.0" mnemonicParsing="false" onAction="#MRBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MS" />
+      <Button id="btn9" fx:id="MPlus1" focusTraversable="false" layoutX="257.0" layoutY="128.0" mnemonicParsing="false" onAction="#MPlusBtnHandler" prefHeight="50.0" prefWidth="50.0" text="M-" />
+      <Button layoutX="319.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Redo" onAction="#redoBtnHandler" />
+  </children>
+</AnchorPane>
