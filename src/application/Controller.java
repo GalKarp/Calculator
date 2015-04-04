@@ -628,15 +628,15 @@ public class Controller{
 			if(flag==true){
 				String str=mainText.getText();
 				String str2=mainText.getText();
-			    String[] splitString = (str.split("[+*]"));
-			    String[] splitString2 = (str.split("[0-9][.][0-9]"));
+			    String[] splitString = (str.split("[+*/]"));
+			    String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
 			      arg1=Double.parseDouble(splitString[0]);
 			      
 			      arg2=Double.parseDouble(splitString[1]);
 			      operator=splitString2[1];
 			      
 			      System.out.println(arg1 + "" + operator +"" + arg2);
-				secondText.setText(arg2 + " " + operator + arg1 + " =");
+				secondText.setText(arg1 + " " + operator + arg2 + " =");
 				flag=false;
 			}
 			
