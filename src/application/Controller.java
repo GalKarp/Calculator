@@ -3,75 +3,62 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.regex.Pattern;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import javafx.animation.ScaleTransition;
-import javafx.animation.ScaleTransitionBuilder;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Controller{
-    static Stage prevStage;
-    private ScaleTransition scaleTransition;
-    private Stage myStage;
-
-
-	boolean actionPerformed = false;
-	private String operator = "+", MEMORY = "";
-	private double memory;
-	private static double sceneH;
+	private static Stage prevStage;
 	private static double sceneW;
-	private boolean flag = false;
-
+	
 	private double arg1 = 0;
 	private double arg2 = 1;
 	private double results = 0;
+	private double memory;
+	
 	private int decimals = 2;
+	
+	private boolean actionPerformed = false;	
+	private boolean flag = false;
+	private boolean percentPressed = false;
+	private boolean expPressed = false;
+	
+	private String operator = "+", MEMORY = "";
 	private Originator originator = new Originator();
-    private CareTaker careTaker = new CareTaker();
+	private CareTaker careTaker = new CareTaker();
 
 	@FXML
 	private AnchorPane AnchorPane;
+	
 	@FXML
 	private ResourceBundle resources;
+	
 	@FXML
 	private URL location;
+	
 	@FXML
 	private Label DEG, RAD, GRA, M, secondText;
+	
 	@FXML
 	private TextField mainText;
+	
 	@FXML
 	private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9,
-			btnPunct, ACBtn, CBtn, divide, egal, minus, multiply, plus, numInv,
-			MPlus, MRBtn, plusMinus, DRGBtn, PIBtn, InvBtn, sinBtn, cosBtn,
-			tanBtn, lnBtn, factorialBtn, squareBtn, sqrtBtn, powBtn,
-			radicalBtn, closeBtn;
+	btnPunct, ACBtn, CBtn, divide, egal, minus, multiply, plus, numInv,
+	MPlus, MRBtn, plusMinus, DRGBtn, PIBtn, InvBtn, sinBtn, cosBtn,
+	tanBtn, lnBtn, factorialBtn, squareBtn, sqrtBtn, powBtn,
+	radicalBtn, closeBtn;
+	
 	@FXML
 	private Label calc;
-
 	
 	@FXML
 	void ACBtnHandler(ActionEvent event) {
@@ -82,35 +69,7 @@ public class Controller{
 	void CBtnHandler(ActionEvent event) {
 		mainText.setText("");
 	}
-
-	@FXML
-	void divideHandler(ActionEvent event) {
-		secondText.setText(mainText.getText() + " / ");
-		operator = "/";
-		computeOperation();
-	}
-
-	@FXML
-	void multiplyHandler(ActionEvent event) {
-		secondText.setText(mainText.getText() + " * ");
-		operator = "*";
-		computeOperation();
-	}
-
-	@FXML
-	void plusHandler(ActionEvent event) {
-		secondText.setText(mainText.getText() + " + ");
-		operator = "+";
-		computeOperation();
-	}
-
-	@FXML
-	void minusHandler(ActionEvent event) {
-		secondText.setText(mainText.getText() + " - ");
-		operator = "-";
-		computeOperation();
-	}
-
+	
 	@FXML
 	void btn0Handler(ActionEvent event) {
 		if (actionPerformed) {
@@ -169,6 +128,137 @@ public class Controller{
 	}
 
 	@FXML
+	void divideHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " / ");
+		operator = "/";
+		computeOperation();
+	}
+
+	@FXML
+	void multiplyHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " * ");
+		operator = "*";
+		computeOperation();
+	}
+
+	@FXML
+	void plusHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " + ");
+		operator = "+";
+		computeOperation();
+	}
+
+	@FXML
+	void minusHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " - ");
+		operator = "-";
+		computeOperation();
+	}
+	
+	@FXML
+	void plusMinusHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			double argument = Double.valueOf(mainText.getText());
+			if (argument > 0) {
+				mainText.setText("-"
+						+ (String.format(
+								("%." + getNumberOfDigits(argument) + "f"),
+								argument)));
+			}
+			if (argument < 0) {
+				mainText.setText((String.format(("%."
+						+ getNumberOfDigits(argument) + "f"),
+						Math.abs(argument))));
+			}
+		} else {
+			mainText.setText("-");
+		}
+	}
+	
+	@FXML
+	void percentBtnHandler(ActionEvent event) {
+		if ((!mainText.getText().isEmpty()) && (arg2 != 0)) {
+			percentPressed = true;
+		}
+	}
+	
+	@FXML
+	void factorialBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			actionPerformed = true;
+			if (argument > 2 && argument <= 23) {
+				decimals = getNumberOfDigits(argument);
+				if (decimals == 0) {
+					long fact = 1; // this will be the result
+					for (long i = 1; i <= argument; i++) {
+						fact *= i;
+					}
+					secondText.setText(argument + "! = ");
+					mainText.setText(fact + "");
+				}
+			} else {
+				secondText
+						.setText("argument should be an integ between 3 and 23 !");
+			}
+		}
+	}
+	
+	@FXML
+	void sqrtBtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = Math.max(getNumberOfDigits(argument), 6);
+			secondText.setText("√" + argument + " = ");
+			argument = Math.sqrt(argument);
+			if ((((int) argument) - argument) == 0) {
+				decimals = 0;
+			}
+			mainText.setText(String.format("%." + decimals + "f", argument));
+			actionPerformed = true;
+		}
+	}
+
+	@FXML
+	void squareBtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = getNumberOfDigits(argument);
+			secondText.setText(argument + " ^2 = ");
+			mainText.setText(String.format("%." + decimals + "f", argument
+					* argument));
+			actionPerformed = true;
+		}
+	}
+	
+	@FXML
+	void tenSquareBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = getNumberOfDigits(argument);
+			secondText.setText(" 10^ " + argument + " = ");
+			mainText.setText(String.format("%." + decimals + "f", Math.pow(10, argument)));
+			actionPerformed = true;
+		}
+	}
+	
+	@FXML
+	void ExpBtnHandler(ActionEvent event) {
+		if ((!mainText.getText().isEmpty()) && (!expPressed)) {
+			String str = mainText.getText();
+			mainText.setText(str + ".e+0");
+			expPressed = true;
+		}
+	}
+
+	@FXML
+	void powBtnHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " ^ ");
+		operator = "^";
+		computeOperation();
+	}
+
+	@FXML
 	void btnPunctHandler(ActionEvent event) {
 		if (actionPerformed) {
 			mainText.setText("");
@@ -213,27 +303,7 @@ public class Controller{
 			mainText.setText(MEMORY);
 		}
 	}
-
-	@FXML
-	void plusMinusHandler(ActionEvent event) {
-		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
-			double argument = Double.valueOf(mainText.getText());
-			if (argument > 0) {
-				mainText.setText("-"
-						+ (String.format(
-								("%." + getNumberOfDigits(argument) + "f"),
-								argument)));
-			}
-			if (argument < 0) {
-				mainText.setText((String.format(("%."
-						+ getNumberOfDigits(argument) + "f"),
-						Math.abs(argument))));
-			}
-		} else {
-			mainText.setText("-");
-		}
-	}
-
+	
 	double trigFactor = 0.017453292519943295;// DEG to RAD
 	int trigIncrement = 1;
 	String DRGStatus = "degrees";
@@ -353,66 +423,11 @@ public class Controller{
 	}
 
 	@FXML
-	void factorialBtnHandler(ActionEvent event) {
-		if (!mainText.getText().isEmpty()) {
-			double argument = Double.parseDouble(mainText.getText());
-			actionPerformed = true;
-			if (argument > 2 && argument <= 23) {
-				decimals = getNumberOfDigits(argument);
-				if (decimals == 0) {
-					long fact = 1; // this will be the result
-					for (long i = 1; i <= argument; i++) {
-						fact *= i;
-					}
-					secondText.setText(argument + "! = ");
-					mainText.setText(fact + "");
-				}
-			} else {
-				secondText
-						.setText("argument should be an integ between 3 and 23 !");
-			}
-		}
-	}
-
-	@FXML
-	void squareBtnHandler(ActionEvent event) {
-		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
-			double argument = Double.parseDouble(mainText.getText());
-			decimals = getNumberOfDigits(argument);
-			secondText.setText(argument + " ^2 = ");
-			mainText.setText(String.format("%." + decimals + "f", argument
-					* argument));
-			actionPerformed = true;
-		}
-	}
-
-	@FXML
-	void sqrtBtnHandler(ActionEvent event) {
-		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
-			double argument = Double.parseDouble(mainText.getText());
-			decimals = Math.max(getNumberOfDigits(argument), 6);
-			secondText.setText("√" + argument + " = ");
-			argument = Math.sqrt(argument);
-			if ((((int) argument) - argument) == 0) {
-				decimals = 0;
-			}
-			mainText.setText(String.format("%." + decimals + "f", argument));
-			actionPerformed = true;
-		}
-	}
-
-	@FXML
-	void powBtnHandler(ActionEvent event) {
-		secondText.setText(mainText.getText() + " ^ ");
-		operator = "^";
-		computeOperation();
-	}
-
-	@FXML
 	void equalBtnHandler(ActionEvent event) {
 		equalPressed();
 		System.out.println("equal pressed");
 	}
+	
 	@FXML
 	void redoBtnHandler(ActionEvent event) {
 		originator.getStateFromMemento(careTaker.getNext());
@@ -425,9 +440,8 @@ public class Controller{
 
 	     mainText.setText(arg1 + operator + arg2);
 	      flag=true;
-
-
 	}
+	
 	@FXML
 	void undoBtnHandler(ActionEvent event) throws ScriptException {
 		originator.getStateFromMemento(careTaker.getPrev());
@@ -440,11 +454,7 @@ public class Controller{
 		mainText.setText(arg1 + operator + arg2);
 
 	      flag=true;
-
-	    
-
-
-		
+	      
 	}
 
 	// INITIALIZE
@@ -606,61 +616,58 @@ public class Controller{
 
 	public void equalPressed() {
 		try {
-			if(flag==false){
-
-			if (!mainText.getText().equals("")) {
+			if(flag == false){
+				if (!mainText.getText().equals("")) {
 				arg2 = Double.parseDouble(mainText.getText());
-			} else {
+				} 
+				else {
 				arg2 = 0;
 			}
 
 			if (!secondText.getText().contains("=")) {
 				secondText.setText(secondText.getText() + " " + arg2 + " = ");
-			} else {
+			}
+			else {
 				secondText.setText(arg2 + " " + operator + arg1 + " =");
+				}
 			}
-			}
-			if(flag==true){
+			
+			if(flag == true){
 				String str=mainText.getText();
-				String str2=mainText.getText();
-			    String[] splitString = (str.split("[+*/]"));
-			    String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
-			      arg1=Double.parseDouble(splitString[0]);
-			      
-			      arg2=Double.parseDouble(splitString[1]);
-			      operator=splitString2[1];
-			      
-			      System.out.println(arg1 + "" + operator +"" + arg2);
+				String[] splitString = (str.split("[+*/]"));
+				String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
+				arg1=Double.parseDouble(splitString[0]);
+
+				arg2=Double.parseDouble(splitString[1]);
+				operator=splitString2[1];
+
+				System.out.println(arg1 + "" + operator +"" + arg2);
 				secondText.setText(arg1 + " " + operator + arg2 + " =");
-				flag=false;
+				flag = false;
 			}
 			
 			if (operator.equals("+")) {
+				if(percentPressed) {
+					arg2 = arg1 * arg2 / 100;
+				}
 				results = arg1 + arg2;
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
+			
 			if (operator.equals("-")) {
+				if(percentPressed) {
+					arg2 = arg1 * arg2 / 100;
+				}
 				results = arg1 - arg2;
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
-			if (operator.equals("*")) {
-				results = arg1 * arg2;
-				decimals = Math.max(getNumberOfDigits(arg1),
-						getNumberOfDigits(arg2));
-			}
-			if (operator.equals("^")) {
-				results = Math.pow(arg1, arg2);
-				decimals = Math.max(getNumberOfDigits(arg1),
-						getNumberOfDigits(arg2));
-			}
-			if (operator.equals("rad")) {
-				results = Math.pow(arg1, (double) (1 / arg2));
-				decimals = Math.max(Math.max(getNumberOfDigits(arg1),
-						getNumberOfDigits(arg2)), 7);
-			}
+			
 			if (operator.equals("/")) {
+				if(percentPressed) {
+					arg2 = arg1 * arg2 / 100;
+				}
 				if (arg2 == 0) {
 					results = 0;
 				} else {
@@ -670,8 +677,33 @@ public class Controller{
 				}
 				
 			}
-			  originator.setState(arg1, arg2, operator);
-			  careTaker.add(originator.saveStateToMemento());
+			
+			if (operator.equals("*")) {
+				if(percentPressed) {
+					arg2 = arg1 * arg2 / 100;
+				}
+				results = arg1 * arg2;
+				decimals = Math.max(getNumberOfDigits(arg1),
+						getNumberOfDigits(arg2));
+			}
+			
+			if (operator.equals("^")) {
+				if(percentPressed) {
+					arg2 = arg1 * arg2 / 100;
+				}
+				results = Math.pow(arg1, arg2);
+				decimals = Math.max(getNumberOfDigits(arg1),
+						getNumberOfDigits(arg2));
+			}
+			
+			if (operator.equals("rad")) {
+				results = Math.pow(arg1, (double) (1 / arg2));
+				decimals = Math.max(Math.max(getNumberOfDigits(arg1),
+						getNumberOfDigits(arg2)), 7);
+			}
+
+			originator.setState(arg1, arg2, operator);
+			careTaker.add(originator.saveStateToMemento());
 			mainText.setText(String.format(("%." + decimals + "f"), results));
 
 			actionPerformed = true;
@@ -688,32 +720,32 @@ public class Controller{
 	}
 
 	public static void setPrimaryScene(Stage primaryStage) {
-		
+
 		prevStage=primaryStage;
 	}
 	@FXML
 	void onRegular(ActionEvent event) throws IOException {
-		            prevStage.setWidth(prevStage.getWidth()-318);
-	            	closeBtn.setLayoutX(280);
-	            	calc.setLayoutX(150);
-	            	mainText.setPrefWidth(300);
-	            	secondText.setPrefWidth(300);
+		prevStage.setWidth(prevStage.getWidth()-318);
+		closeBtn.setLayoutX(280);
+		calc.setLayoutX(150);
+		mainText.setPrefWidth(300);
+		secondText.setPrefWidth(300);
 
-    }
+	}
 	@FXML
 	void onScientific(ActionEvent event) throws IOException {
-		            prevStage.setWidth(sceneW);
-	            	closeBtn.setLayoutX(593);
-	            	calc.setLayoutX(285);
-	            	mainText.setPrefWidth(609);
-	            	secondText.setPrefWidth(598);
+		prevStage.setWidth(sceneW);
+		closeBtn.setLayoutX(593);
+		calc.setLayoutX(285);
+		mainText.setPrefWidth(609);
+		secondText.setPrefWidth(598);
 
-    }
+	}
 
 
 
-			
-		}
+
+}
 
 	
 	

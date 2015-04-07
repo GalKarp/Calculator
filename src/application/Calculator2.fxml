@@ -19,7 +19,7 @@
       <Button layoutX="319.0" layoutY="218.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Undo" onAction="#undoBtnHandler" />
 <Button id="equalBtn" fx:id="equal" layoutX="259.0" layoutY="370.0" mnemonicParsing="false" onAction="#equalBtnHandler" prefHeight="110.0" prefWidth="50.0" text="=" />
 <Button id="btn9" fx:id="numInv" focusTraversable="false" layoutX="259.0" layoutY="310.0" mnemonicParsing="false" onAction="#numInvBtnHandler" prefHeight="51.0" prefWidth="50.0" text="1/x" />
-      <Button id="precentage" fx:id="numInv1" focusTraversable="false" layoutX="258.0" layoutY="249.0" mnemonicParsing="false" onAction="#numInvBtnHandler" prefHeight="50.000099999997474" prefWidth="50.0" text="\%" />
+      <Button id="precentage" fx:id="numInv1" focusTraversable="false" layoutX="258.0" layoutY="249.0" mnemonicParsing="false" onAction="#percentBtnHandler" prefHeight="50.000099999997474" prefWidth="50.0" text="\%" />
   <Button id="powBtn" fx:id="sqrtBtn" focusTraversable="false" layoutX="258.0" layoutY="189.0" mnemonicParsing="false" onAction="#sqrtBtnHandler" prefHeight="50.0" prefWidth="50.0" text="√x" />
 <Button fx:id="plus" focusTraversable="false" layoutX="199.0" layoutY="429.0" mnemonicParsing="false" onAction="#plusHandler" prefHeight="51.0" prefWidth="50.0" text="+" />
 <Button fx:id="minus" focusTraversable="false" layoutX="199.0" layoutY="369.0" mnemonicParsing="false" onAction="#minusHandler" prefHeight="51.0" prefWidth="50.0" text="-" />
@@ -60,7 +60,7 @@
       <Button id="powBtn" fx:id="squareBtn11" focusTraversable="false" layoutX="508.0" layoutY="430.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="log" />
       <Button id="powBtn" fx:id="factorialBtn1" focusTraversable="false" layoutX="568.0" layoutY="310.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="y√x" />
       <Button id="powBtn" fx:id="factorialBtn11" focusTraversable="false" layoutX="568.0" layoutY="369.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="3√x" />
-      <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="10^x" />
+      <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#tenSquareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^10" />
       <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
       <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
       <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />
@@ -71,7 +71,7 @@
       <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="dms" />
       <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
       <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
-      <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
+      <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#ExpBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="317.0" layoutY="127.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
       <RadioButton layoutX="333.0" layoutY="143.0" mnemonicParsing="false" text="Degrees" />
       <RadioButton layoutX="433.0" layoutY="144.0" mnemonicParsing="false" text="Radians" />
