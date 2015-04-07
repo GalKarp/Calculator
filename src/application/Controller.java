@@ -72,11 +72,6 @@ public class Controller{
 	@FXML
 	private Label calc;
 
-
-	
-	
-
-	
 	
 	@FXML
 	void ACBtnHandler(ActionEvent event) {
