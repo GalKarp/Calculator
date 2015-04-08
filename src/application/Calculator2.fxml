@@ -70,7 +70,7 @@
       <Button id="powBtn" fx:id="factorialBtn2111" focusTraversable="false" layoutX="379.0" layoutY="193.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Inv" />
       <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="dms" />
       <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
-      <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
+      <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#FeBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
       <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#ExpBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="317.0" layoutY="127.0" stroke="BLACK" strokeType="INSIDE" width="298.0" />
       <RadioButton layoutX="333.0" layoutY="143.0" mnemonicParsing="false" text="Degrees" />
