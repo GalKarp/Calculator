@@ -234,6 +234,17 @@ public class Controller{
 	}
 	
 	@FXML
+	void square3BtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = getNumberOfDigits(argument);
+			secondText.setText(argument + " ^3 = ");
+			mainText.setText(String.format("%." + decimals + "f", argument * argument * argument));
+			actionPerformed = true;
+		}
+	}
+	
+	@FXML
 	void FeBtnHandler(ActionEvent event) {
 		if (!mainText.getText().isEmpty()) {
 			String str = mainText.getText();
