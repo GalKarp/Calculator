@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javax.script.ScriptException;
 
 import javafx.event.ActionEvent;
@@ -62,6 +63,10 @@ public class Controller{
 	
 	@FXML
 	private Label calc;
+	
+	private String arg3;
+	private Double arg4;
+
 	
 	@FXML
 	void ACBtnHandler(ActionEvent event) {
@@ -384,11 +389,15 @@ public class Controller{
 			if (firstFunction) {
 				results = Math.sin(trigFactor * argument);
 				ComputeTrigonometricalOperation("sin", DRGStatus);
+				originator.setState(argument, 0.0, "sin");
+				careTaker.add(originator.saveStateToMemento());
 			} 
 			else {
 				if (-1 <= argument && 1 >= argument) {
 					results = Math.asin(argument);
 					ComputeTrigonometricalOperation("asin", "");
+					originator.setState(argument, 0.0, "asin");
+					careTaker.add(originator.saveStateToMemento());
 				} 
 				else {
 					secondText.setText("argument must be between -1 and 1");
@@ -404,13 +413,15 @@ public class Controller{
 			if (firstFunction) {
 				results = Math.cos(trigFactor * argument);
 				ComputeTrigonometricalOperation("cos", DRGStatus);
-				originator.setState(results, null, null);
+				originator.setState(argument, 0.0, "cos");
 				careTaker.add(originator.saveStateToMemento());
 			}
 			else {
 				if (-1 <= argument && 1 >= argument) {
 					results = Math.acos(argument);
 					ComputeTrigonometricalOperation("acos", "");
+					originator.setState(argument, 0.0, "acos");
+					careTaker.add(originator.saveStateToMemento());
 
 				} 
 				else {
@@ -427,10 +438,14 @@ public class Controller{
 			if (firstFunction) {
 				results = Math.tan(trigFactor * argument);
 				ComputeTrigonometricalOperation("tan", DRGStatus);
+				originator.setState(argument, 0.0, "tan");
+				careTaker.add(originator.saveStateToMemento());
 			} 
 			else {
 				results = Math.atan(argument);
 				ComputeTrigonometricalOperation("atan", "");
+				originator.setState(argument, 0.0, "atan");
+				careTaker.add(originator.saveStateToMemento());
 			}
 		}
 	}
@@ -468,8 +483,16 @@ public class Controller{
 		 mainText.setEditable(true);
 			secondText.setText("");
 
-
+			if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
+				
+			     mainText.setText(operator + "(" + arg1 + ")");
+				
+				
+			}
+			else{
 	     mainText.setText(arg1 + operator + arg2);
+	     
+			}
 	      flag=true;
 	}
 	
@@ -482,7 +505,16 @@ public class Controller{
 		//equalPressed();
 		mainText.setEditable(true);
 		secondText.setText("");
-		mainText.setText(arg1 + operator + arg2);
+		if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
+			
+		     mainText.setText(operator + "(" + arg1 + ")");
+			
+			
+		}
+		else{
+    mainText.setText(arg1 + operator + arg2);
+    
+		}
 
 		flag=true;
 
@@ -665,12 +697,25 @@ public class Controller{
 			
 			if(flag == true){
 				String str=mainText.getText();
+				
+
 				String[] splitString = (str.split("[+*/]"));
 				String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
+
+
+
 				arg1=Double.parseDouble(splitString[0]);
 
 				arg2=Double.parseDouble(splitString[1]);
 				operator=splitString2[1];
+				
+				
+
+//				if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
+////					ComputeTrigonometricalOperation(operator, DRGStatus);
+//					cosBtnHandler(null);
+//					
+//				}
 
 				System.out.println(arg1 + "" + operator +"" + arg2);
 				secondText.setText(arg1 + " " + operator + arg2 + " =");
@@ -694,6 +739,7 @@ public class Controller{
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
+			
 			
 			if (operator.equals("/")) {
 				if(percentPressed) {
