@@ -48,7 +48,7 @@ public class Controller{
 	private URL location;
 	
 	@FXML
-	private Label DEG, RAD, GRA, M, secondText;
+	private Label M, secondText;
 	
 	@FXML
 	private TextField mainText;
@@ -342,26 +342,24 @@ public class Controller{
 
 	@FXML
 	void DRGBtnHandler(ActionEvent event) {
-		trigIncrement++;
-		if (trigIncrement == 1) {
+
+	}
+	@FXML
+	void DEGbuttonHandler(ActionEvent event) {
+		System.out.println("dvir");
 			DRGStatus = "degrees";
 			trigFactor = 0.017453292519943295;
-			DEG.setText("DEG");
-			GRA.setText("");
-		}
-		if (trigIncrement == 2) {
-			DRGStatus = "radians";
-			trigFactor = 1;
-			DEG.setText("");
-			RAD.setText("RAD");
-		}
-		if (trigIncrement == 3) {
-			DRGStatus = "grads";
-			trigFactor = 0.015707963267948;
-			GRA.setText("GRA");
-			RAD.setText("");
-		}
-		trigIncrement = trigIncrement % 3;
+	}
+	@FXML
+	void RADbuttonHandler(ActionEvent event) {
+		DRGStatus = "radians";
+		trigFactor = 1;
+	}
+	@FXML
+	void GRAbuttonHandler(ActionEvent event) {
+		DRGStatus = "grads";
+		trigFactor = 0.015707963267948;
+
 	}
 
 	@FXML
@@ -406,11 +404,14 @@ public class Controller{
 			if (firstFunction) {
 				results = Math.cos(trigFactor * argument);
 				ComputeTrigonometricalOperation("cos", DRGStatus);
+				originator.setState(results, null, null);
+				careTaker.add(originator.saveStateToMemento());
 			}
 			else {
 				if (-1 <= argument && 1 >= argument) {
 					results = Math.acos(argument);
 					ComputeTrigonometricalOperation("acos", "");
+
 				} 
 				else {
 					secondText.setText("argument must be between -1 and 1");
