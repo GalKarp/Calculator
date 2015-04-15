@@ -699,26 +699,49 @@ public class Controller{
 				String str=mainText.getText();
 				
 
-				String[] splitString = (str.split("[+*/]"));
+				String[] splitString = (str.split("[+*/()]"));
 				String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
 
 
+				if(splitString[0].equals("cos")){
+					double argument = 0;
+					if (!mainText.getText().isEmpty()) {
+						argument = Double.parseDouble(splitString[1]);
+						if (firstFunction) {
+							results = Math.cos(trigFactor * argument);
+							ComputeTrigonometricalOperation("cos", DRGStatus);
+							originator.setState(argument, 0.0, "cos");
+							careTaker.add(originator.saveStateToMemento());
+						}
+						else {
+							if (-1 <= argument && 1 >= argument) {
+								results = Math.acos(argument);
+								ComputeTrigonometricalOperation("acos", "");
+								originator.setState(argument, 0.0, "acos");
+								careTaker.add(originator.saveStateToMemento());
 
+							} 
+							else {
+								secondText.setText("argument must be between -1 and 1");
+							}
+						}
+					}
+					
+					secondText.setText("cos(" + argument + ")");
+				}else{
+				
+				
 				arg1=Double.parseDouble(splitString[0]);
 
 				arg2=Double.parseDouble(splitString[1]);
 				operator=splitString2[1];
-				
-				
-
-//				if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
-////					ComputeTrigonometricalOperation(operator, DRGStatus);
-//					cosBtnHandler(null);
-//					
-//				}
-
 				System.out.println(arg1 + "" + operator +"" + arg2);
 				secondText.setText(arg1 + " " + operator + arg2 + " =");
+				
+				}
+
+
+
 				flag = false;
 			}
 			
