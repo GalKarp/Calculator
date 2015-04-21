@@ -64,8 +64,7 @@
       <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
       <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
       <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />
-      <Button id="powBtn" fx:id="factorialBtn211" focusTraversable="false" layoutX="566.0" layoutY="192.0" mnemonicParsing="false" onAction="#factorialBtnHandler" prefHeight="50.0" prefWidth="50.0" text="ln" />
-      <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="dms" />
+      <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="ln" />
       <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
       <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#FeBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
       <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#ExpBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
