@@ -26,7 +26,6 @@ public class Controller{
 	private double trigFactor = 0.017453292519943295;// DEG to RAD
 	
 	private int decimals = 2;
-	private int trigIncrement = 1;
 	
 	private boolean actionPerformed = false;	
 	private boolean flag = false;
@@ -64,8 +63,6 @@ public class Controller{
 	@FXML
 	private Label calc;
 	
-	private String arg3;
-	private Double arg4;
 
 	
 	@FXML
@@ -226,6 +223,31 @@ public class Controller{
 			actionPerformed = true;
 		}
 	}
+	
+	@FXML
+	void XsqrtYBtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			operator = "yroot";
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = Math.max(getNumberOfDigits(argument), 6);
+			String str = argument + " yroot";
+			secondText.setText(str);
+			computeOperation();
+		}
+	}
+	
+	@FXML
+	void Xsqrt3BtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			operator = "3root";
+			double argument = Double.parseDouble(mainText.getText());
+			decimals = Math.max(getNumberOfDigits(argument), 6);
+			String str = argument + " 3root";
+			arg2 = 3;
+			secondText.setText(str);
+			computeOperation();
+		}
+	}
 
 	@FXML
 	void squareBtnHandler(ActionEvent event) {
@@ -290,6 +312,15 @@ public class Controller{
 			String str = mainText.getText();
 			mainText.setText(str + ".e+0");
 			expPressed = true;
+		}
+	}
+	
+	@FXML
+	void delBtnHandler(ActionEvent event) {
+		if ((!mainText.getText().isEmpty()) && (!expPressed)) {
+			String str = mainText.getText();
+			str = str.substring(0, str.length() - 1);
+			mainText.setText(str);
 		}
 	}
 
@@ -528,63 +559,7 @@ public class Controller{
 			System.out.println("anchor pane focused");
 		}
 	}
-
-	// END OF INITIALIZE
-
-	// Keyboard input
-	@FXML
-	void keboardListener(KeyEvent ke) {
-		// number input
-//		if ("123456789".contains(ke.getText())) {
-//			NumericalBottonHandle(ke);
-//		}
-//		if (ke.getCode().equals(KeyCode.DIGIT0)
-//				|| ke.getCode().equals(KeyCode.NUMPAD0)) {
-//			if (actionPerformed) {
-//				mainText.setText("");
-//				secondText.setText("");
-//			}
-//			actionPerformed = false;
-//			if (!mainText.getText().equals("0")) {
-//				mainText.setText(mainText.getText() + "0");
-//			}
-//		}
-//		if (".".contains(ke.getText())) {
-//			if (actionPerformed) {
-//				mainText.setText("");
-//				secondText.setText("");
-//			}
-//			actionPerformed = false;
-//			if (mainText.getText().equals("")) {
-//				mainText.setText("0.");
-//			}
-//			if (!mainText.getText().contains(".")) {
-//				mainText.setText(mainText.getText() + ".");
-//			}
-//		}
-//		// operation input
-//		if ("+-*/".contains(ke.getText())) {
-//			if (ke.getText().equals("+")) {
-//				operationHandler("+");
-//			}
-//			if (ke.getText().equals("-")) {
-//				operationHandler("-");
-//			}
-//			if (ke.getText().equals("*")) {
-//				operationHandler("*");
-//			}
-//			if (ke.getText().equals("/")) {
-//				operationHandler("/");
-//			}
-//		}
-//
-//		// Enter key calls equal method
-//		if (ke.getCode().equals(KeyCode.ENTER)) {
-//			equalPressed();
-//			// System.out.println("equal din key listener");
-//		}
-	}
-
+	
 	@FXML
 	void mainTextEnterPressed(ActionEvent event) {
 		// egalPressed();
@@ -609,11 +584,11 @@ public class Controller{
 				
 			System.out.println(arg1);
 			mainText.setText("");
-		} else {
+		} 
+		else {
 			arg1 = memory;
 			mainText.setText("");			
 			System.out.println(memory);
-			
 		}
 	}
 
@@ -680,28 +655,26 @@ public class Controller{
 	public void equalPressed() {
 		try {
 			if(flag == false){
-				if (!mainText.getText().equals("")) {
-				arg2 = Double.parseDouble(mainText.getText());
+				if (!mainText.getText().equals("") && !operator.equals("yroot")) {
+					arg2 = Double.parseDouble(mainText.getText());
 				} 
 				else {
-				arg2 = 0;
-			}
+					arg2 = 0;
+				}
 
-			if (!secondText.getText().contains("=")) {
-				secondText.setText(secondText.getText() + " " + arg2 + " = ");
-			}
-			else {
-				secondText.setText(arg2 + " " + operator + arg1 + " =");
+				if (!secondText.getText().contains("=")) {
+					secondText.setText(secondText.getText() + " " + arg2 + " = ");
+				}
+				else {
+					secondText.setText(arg2 + " " + operator + arg1 + " =");
 				}
 			}
-			
+
 			if(flag == true){
 				String str=mainText.getText();
-				
 
 				String[] splitString = (str.split("[+*/()]"));
 				String[] splitString2 = (str.split("[0-9]+[.][0-9]+"));
-
 
 				if(splitString[0].equals("cos")){
 					double argument = 0;
@@ -726,25 +699,18 @@ public class Controller{
 							}
 						}
 					}
-					
+
 					secondText.setText("cos(" + argument + ")");
-				}else{
-				
-				
-				arg1=Double.parseDouble(splitString[0]);
-
-				arg2=Double.parseDouble(splitString[1]);
-				operator=splitString2[1];
-				System.out.println(arg1 + "" + operator +"" + arg2);
-				secondText.setText(arg1 + " " + operator + arg2 + " =");
-				
 				}
-
-
-
+				else {
+					arg1=Double.parseDouble(splitString[0]);
+					arg2=Double.parseDouble(splitString[1]);
+					operator=splitString2[1];
+					System.out.println(arg1 + "" + operator +"" + arg2);
+					secondText.setText(arg1 + " " + operator + arg2 + " =");
+				}
 				flag = false;
 			}
-			
 			if (operator.equals("+")) {
 				if(percentPressed) {
 					arg2 = arg1 * arg2 / 100;
@@ -753,7 +719,7 @@ public class Controller{
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
-			
+
 			if (operator.equals("-")) {
 				if(percentPressed) {
 					arg2 = arg1 * arg2 / 100;
@@ -762,22 +728,22 @@ public class Controller{
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
-			
-			
+
+
 			if (operator.equals("/")) {
 				if(percentPressed) {
 					arg2 = arg1 * arg2 / 100;
 				}
 				if (arg2 == 0) {
 					results = 0;
-				} else {
+				} 
+				else {
 					results = arg1 / arg2;
 					decimals = Math.max(5, Math.max(getNumberOfDigits(arg1),
 							getNumberOfDigits(arg2)));
 				}
-				
 			}
-			
+
 			if (operator.equals("*")) {
 				if(percentPressed) {
 					arg2 = arg1 * arg2 / 100;
@@ -786,7 +752,7 @@ public class Controller{
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
-			
+
 			if (operator.equals("^")) {
 				if(percentPressed) {
 					arg2 = arg1 * arg2 / 100;
@@ -795,7 +761,25 @@ public class Controller{
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
+
+			if (operator.equals("yroot")) {
+				if(arg2 == 0)
+				{
+					arg2 = 1.0 / arg1;
+				}
+				else {
+					arg2 = 1.0 / arg2;
+				}
+				System.out.println("arg2 = " + arg2);
+				results = Math.pow(arg1, arg2);
+			}
 			
+			if (operator.equals("3root")) {
+				arg2 = 1.0 / 3.0;
+				System.out.println("arg2 = " + arg2);
+				results = Math.pow(arg1, arg2);
+			}
+
 			if (operator.equals("rad")) {
 				results = Math.pow(arg1, (double) (1 / arg2));
 				decimals = Math.max(Math.max(getNumberOfDigits(arg1),
@@ -812,7 +796,6 @@ public class Controller{
 		}
 	}
 
-	
 	public static void saveSceneSize(Double height, Double width) {
 		
 		sceneW=width;
@@ -843,9 +826,6 @@ public class Controller{
 		secondText.setPrefWidth(598);
 
 	}
-
-
-
 
 }
 
