@@ -56,16 +56,16 @@
   <Button id="trigBtn" fx:id="tanBtn" focusTraversable="false" layoutX="448.0" layoutY="368.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="50.0" text="tan" />
       <Button id="powBtn" fx:id="squareBtn1" focusTraversable="false" layoutX="508.0" layoutY="370.0" mnemonicParsing="false" onAction="#square3BtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^3" />
       <Button fx:id="btn71" focusTraversable="false" layoutX="15.0" layoutY="191.0" mnemonicParsing="false" onAction="#delBtnHandler" prefHeight="50.0" prefWidth="50.0" text="&lt;---" />
-      <Button id="trigBtn" fx:id="tanBtn1" focusTraversable="false" layoutX="447.0" layoutY="428.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Mod" />
-      <Button id="powBtn" fx:id="squareBtn11" focusTraversable="false" layoutX="508.0" layoutY="430.0" mnemonicParsing="false" onAction="#squareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="log" />
+      <Button id="trigBtn" fx:id="tanBtn1" focusTraversable="false" layoutX="447.0" layoutY="428.0" mnemonicParsing="false" onAction="#modBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Mod" />
+      <Button id="powBtn" fx:id="squareBtn11" focusTraversable="false" layoutX="508.0" layoutY="430.0" mnemonicParsing="false" onAction="#logBtnHandler" prefHeight="50.0" prefWidth="50.0" text="log" />
       <Button id="powBtn" fx:id="factorialBtn1" focusTraversable="false" layoutX="568.0" layoutY="310.0" mnemonicParsing="false" onAction="#XsqrtYBtnHandler" prefHeight="50.0" prefWidth="50.0" text="y√x" />
       <Button id="powBtn" fx:id="factorialBtn11" focusTraversable="false" layoutX="568.0" layoutY="369.0" mnemonicParsing="false" onAction="#Xsqrt3BtnHandler" prefHeight="50.0" prefWidth="50.0" text="3√x" />
       <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#tenSquareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^10" />
-      <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#tanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
-      <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
-      <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#cosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />
-      <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="ln" />
-      <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#PIBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
+      <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#atanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
+      <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#acosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
+      <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#asinBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />
+      <Button id="btn9" fx:id="PIBtn1" focusTraversable="false" layoutX="319.0" layoutY="310.0" mnemonicParsing="false" onAction="#lnBtnHandler" prefHeight="50.0" prefWidth="50.0" text="ln" />
+      <Button id="btn9" fx:id="PIBtn11" focusTraversable="false" layoutX="318.0" layoutY="251.0" mnemonicParsing="false" onAction="#intBtnHandler" prefHeight="50.0" prefWidth="50.0" text="Int" />
       <Button id="btn9" fx:id="PIBtn2" focusTraversable="false" layoutX="320.0" layoutY="429.0" mnemonicParsing="false" onAction="#FeBtnHandler" prefHeight="50.0" prefWidth="50.0" text="F-E" />
       <Button id="btn9" fx:id="PIBtn21" focusTraversable="false" layoutX="379.0" layoutY="428.0" mnemonicParsing="false" onAction="#ExpBtnHandler" prefHeight="50.0" prefWidth="58.0" text="Exp" />
       
@@ -74,7 +74,7 @@
 	<fx:define>
  <ToggleGroup fx:id="myToggleGroup"/>
  </fx:define> <children>
- <RadioButton layoutX="333.0" layoutY="143.0" mnemonicParsing="false" text="Degrees" toggleGroup="$myToggleGroup" onAction="#DEGbuttonHandler"/>
+ <RadioButton id="deg" layoutX="333.0" layoutY="143.0" mnemonicParsing="false" text="Degrees" toggleGroup="$myToggleGroup" onAction="#DEGbuttonHandler"/>
  <RadioButton layoutX="433.0" layoutY="144.0" mnemonicParsing="false" text="Radians" toggleGroup="$myToggleGroup" onAction="#RADbuttonHandler"/>
  <RadioButton layoutX="544.0" layoutY="143.0" mnemonicParsing="false" text="Grads" toggleGroup="$myToggleGroup" onAction="#GRAbuttonHandler"/>
  </children>

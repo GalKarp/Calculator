@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -51,6 +52,9 @@ public class Controller{
 	private Label M, secondText;
 	
 	@FXML
+	private RadioButton deg;
+	
+	@FXML
 	private TextField mainText;
 	
 	@FXML
@@ -62,8 +66,6 @@ public class Controller{
 	
 	@FXML
 	private Label calc;
-	
-
 	
 	@FXML
 	void ACBtnHandler(ActionEvent event) {
@@ -161,6 +163,13 @@ public class Controller{
 	}
 	
 	@FXML
+	void modBtnHandler(ActionEvent event) {
+		secondText.setText(mainText.getText() + " Mod ");
+		operator = "mod";
+		computeOperation();
+	}
+	
+	@FXML
 	void plusMinusHandler(ActionEvent event) {
 		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
 			double argument = Double.valueOf(mainText.getText());
@@ -206,6 +215,18 @@ public class Controller{
 			else {
 				secondText.setText("argument should be an integ between 3 and 23 !");
 			}
+		}
+	}
+	
+	@FXML
+	void intBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			actionPerformed = true;
+			decimals = getNumberOfDigits(argument);
+			secondText.setText("Int(" + argument + ")");
+			argument = Math.floor(argument);
+			mainText.setText("" + argument);
 		}
 	}
 	
@@ -380,17 +401,19 @@ public class Controller{
 	void DRGBtnHandler(ActionEvent event) {
 
 	}
+	
 	@FXML
 	void DEGbuttonHandler(ActionEvent event) {
-		System.out.println("dvir");
 			DRGStatus = "degrees";
 			trigFactor = 0.017453292519943295;
 	}
+	
 	@FXML
 	void RADbuttonHandler(ActionEvent event) {
 		DRGStatus = "radians";
 		trigFactor = 1;
 	}
+	
 	@FXML
 	void GRAbuttonHandler(ActionEvent event) {
 		DRGStatus = "grads";
@@ -399,40 +422,40 @@ public class Controller{
 	}
 
 	@FXML
-	void InvBtnHandler(ActionEvent event) {
-		if (firstFunction == true) {
-			firstFunction = false;
-			sinBtn.setText("asin");
-			cosBtn.setText("acos");
-			tanBtn.setText("atan");
-		} else {
-			firstFunction = true;
-			sinBtn.setText("sin");
-			cosBtn.setText("cos");
-			tanBtn.setText("tan");
-		}
-	}
-
-	@FXML
 	void sinBtnHandler(ActionEvent event) {
 		if (!mainText.getText().isEmpty()) {
 			double argument = Double.parseDouble(mainText.getText());
-			if (firstFunction) {
-				results = Math.sin(trigFactor * argument);
-				ComputeTrigonometricalOperation("sin", DRGStatus);
-				originator.setState(argument, 0.0, "sin");
+			results = Math.sin(trigFactor * argument);
+			ComputeTrigonometricalOperation("sin", DRGStatus);
+			originator.setState(argument, 0.0, "sin");
+			careTaker.add(originator.saveStateToMemento());
+		}
+	}
+	
+	@FXML
+	void asinBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			if (-1 <= argument && 1 >= argument) {
+				if(DRGStatus.equals("degrees")) {
+					results = Math.toDegrees(Math.asin(Math.sin(argument)));
+					System.out.println("deg");
+				}
+				else if(DRGStatus.equals("grads"))
+				{
+					results = Math.sin(Math.PI * argument / 200);
+					System.out.println("grd");
+				}
+				else {
+					results = Math.acos(argument);
+					System.out.println("rad");
+				}
+				ComputeTrigonometricalOperation("asin", "");
+				originator.setState(argument, 0.0, "asin");
 				careTaker.add(originator.saveStateToMemento());
 			} 
 			else {
-				if (-1 <= argument && 1 >= argument) {
-					results = Math.asin(argument);
-					ComputeTrigonometricalOperation("asin", "");
-					originator.setState(argument, 0.0, "asin");
-					careTaker.add(originator.saveStateToMemento());
-				} 
-				else {
-					secondText.setText("argument must be between -1 and 1");
-				}
+				secondText.setText("argument must be between -1 and 1");
 			}
 		}
 	}
@@ -441,23 +464,38 @@ public class Controller{
 	void cosBtnHandler(ActionEvent event) {
 		if (!mainText.getText().isEmpty()) {
 			double argument = Double.parseDouble(mainText.getText());
-			if (firstFunction) {
-				results = Math.cos(trigFactor * argument);
-				ComputeTrigonometricalOperation("cos", DRGStatus);
-				originator.setState(argument, 0.0, "cos");
-				careTaker.add(originator.saveStateToMemento());
-			}
-			else {
-				if (-1 <= argument && 1 >= argument) {
-					results = Math.acos(argument);
-					ComputeTrigonometricalOperation("acos", "");
-					originator.setState(argument, 0.0, "acos");
-					careTaker.add(originator.saveStateToMemento());
-
-				} 
-				else {
-					secondText.setText("argument must be between -1 and 1");
+			results = Math.cos(trigFactor * argument);
+			ComputeTrigonometricalOperation("cos", DRGStatus);
+			originator.setState(argument, 0.0, "cos");
+			careTaker.add(originator.saveStateToMemento());
+		}
+	}
+	
+	@FXML
+	void acosBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			if (-1 <= argument && 1 >= argument) {
+				if(DRGStatus.equals("degrees")) {
+					results = Math.toDegrees(Math.acos(Math.sin(argument)));
+					System.out.println("deg");
 				}
+				else if(DRGStatus.equals("grads"))
+				{
+					System.out.println("grd");
+					results = Math.cos(Math.PI * argument / 200);
+
+				}
+				else {
+					results = Math.acos(argument);
+					System.out.println("rad");
+				}
+				ComputeTrigonometricalOperation("acos", "");
+				originator.setState(argument, 0.0, "acos");
+				careTaker.add(originator.saveStateToMemento());
+			} 
+			else {
+				secondText.setText("argument must be between -1 and 1");
 			}
 		}
 	}
@@ -466,21 +504,31 @@ public class Controller{
 	void tanBtnHandler(ActionEvent event) {
 		if (!mainText.getText().isEmpty()) {
 			double argument = Double.parseDouble(mainText.getText());
-			if (firstFunction) {
-				results = Math.tan(trigFactor * argument);
-				ComputeTrigonometricalOperation("tan", DRGStatus);
-				originator.setState(argument, 0.0, "tan");
-				careTaker.add(originator.saveStateToMemento());
-			} 
-			else {
-				results = Math.atan(argument);
-				ComputeTrigonometricalOperation("atan", "");
-				originator.setState(argument, 0.0, "atan");
-				careTaker.add(originator.saveStateToMemento());
-			}
+			results = Math.tan(trigFactor * argument);
+			ComputeTrigonometricalOperation("tan", DRGStatus);
+			originator.setState(argument, 0.0, "tan");
+			careTaker.add(originator.saveStateToMemento());
 		}
 	}
-
+	
+	@FXML
+	void atanBtnHandler(ActionEvent event) {
+		if (!mainText.getText().isEmpty()) {
+			double argument = Double.parseDouble(mainText.getText());
+			if(DRGStatus.equals("degrees")) {
+				results = Math.toDegrees(Math.atan(Math.sin(argument)));
+				System.out.println("deg");
+			}
+			else {
+				results = Math.acos(argument);
+				System.out.println("rad");
+			}
+			ComputeTrigonometricalOperation("asin", "");
+			originator.setState(argument, 0.0, "asin");
+			careTaker.add(originator.saveStateToMemento());
+		} 
+	}
+	
 	@FXML
 	void lnBtnHandler(ActionEvent event) {
 		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
@@ -490,6 +538,24 @@ public class Controller{
 				secondText.setText("ln(" + argument + ") = ");
 				mainText.setText(String.format("%." + decimals + "f",
 						Math.log(argument)));
+				actionPerformed = true;
+			} 
+			else {
+				secondText.setText("argument must be greater than 0 !");
+			}
+			actionPerformed = true;
+		}
+	}
+	
+	@FXML
+	void logBtnHandler(ActionEvent event) {
+		if (!(mainText.getText().isEmpty() || mainText.getText().equals("-"))) {
+			double argument = Double.parseDouble(mainText.getText());
+			if (argument > 0) {
+				decimals = Math.max(getNumberOfDigits(argument), 6);
+				secondText.setText("ln(" + argument + ") = ");
+				mainText.setText(String.format("%." + decimals + "f",
+						Math.log10(argument)));
 				actionPerformed = true;
 			} 
 			else {
@@ -508,23 +574,20 @@ public class Controller{
 	@FXML
 	void redoBtnHandler(ActionEvent event) {
 		originator.getStateFromMemento(careTaker.getNext());
-		 arg1= originator.getFirstNumber();
-		 arg2= originator.getSecondNumber();
-		 operator=originator.getOperator()+"";
-		 mainText.setEditable(true);
-			secondText.setText("");
+		arg1= originator.getFirstNumber();
+		arg2= originator.getSecondNumber();
+		operator=originator.getOperator()+"";
+		mainText.setEditable(true);
+		secondText.setText("");
 
-			if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
-				
-			     mainText.setText(operator + "(" + arg1 + ")");
-				
-				
-			}
-			else{
-	     mainText.setText(arg1 + operator + arg2);
-	     
-			}
-	      flag=true;
+		if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
+
+			mainText.setText(operator + "(" + arg1 + ")");
+		}
+		else{
+			mainText.setText(arg1 + operator + arg2);
+		}
+		flag=true;
 	}
 	
 	@FXML
@@ -556,6 +619,7 @@ public class Controller{
 	void initialize() {
 		AnchorPane.setFocusTraversable(true);
 		if (AnchorPane.isFocused()) {
+			deg.setSelected(true);
 			System.out.println("anchor pane focused");
 		}
 	}
@@ -758,6 +822,12 @@ public class Controller{
 					arg2 = arg1 * arg2 / 100;
 				}
 				results = Math.pow(arg1, arg2);
+				decimals = Math.max(getNumberOfDigits(arg1),
+						getNumberOfDigits(arg2));
+			}
+			
+			if (operator.equals("mod")) {
+				results = arg1 % arg2;
 				decimals = Math.max(getNumberOfDigits(arg1),
 						getNumberOfDigits(arg2));
 			}
