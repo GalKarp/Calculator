@@ -438,16 +438,18 @@ public class Controller{
 			double argument = Double.parseDouble(mainText.getText());
 			if (-1 <= argument && 1 >= argument) {
 				if(DRGStatus.equals("degrees")) {
-					results = Math.toDegrees(Math.asin(Math.sin(argument)));
+					results = Math.toDegrees(Math.asin(argument));
 					System.out.println("deg");
 				}
 				else if(DRGStatus.equals("grads"))
 				{
+					argument = Math.toDegrees(argument);
 					results = Math.sin(Math.PI * argument / 200);
+					results = Math.toDegrees(Math.asin(results));
 					System.out.println("grd");
 				}
 				else {
-					results = Math.acos(argument);
+					results = Math.asin(argument);
 					System.out.println("rad");
 				}
 				ComputeTrigonometricalOperation("asin", "");
@@ -483,8 +485,9 @@ public class Controller{
 				else if(DRGStatus.equals("grads"))
 				{
 					System.out.println("grd");
+					argument = Math.toDegrees(argument);
 					results = Math.cos(Math.PI * argument / 200);
-
+					results = Math.toDegrees(Math.acos(results));					
 				}
 				else {
 					results = Math.acos(argument);
@@ -516,15 +519,23 @@ public class Controller{
 		if (!mainText.getText().isEmpty()) {
 			double argument = Double.parseDouble(mainText.getText());
 			if(DRGStatus.equals("degrees")) {
-				results = Math.toDegrees(Math.atan(Math.sin(argument)));
+				results = Math.toDegrees(Math.atan(argument));
 				System.out.println("deg");
 			}
+			else if(DRGStatus.equals("grads"))
+			{
+				System.out.println("grd");
+				argument = Math.toDegrees(argument);
+				results = Math.tan(Math.PI * argument / 200);
+				results = Math.toDegrees(Math.atan(results));
+
+			}
 			else {
-				results = Math.acos(argument);
+				results = Math.atan(argument);
 				System.out.println("rad");
 			}
-			ComputeTrigonometricalOperation("asin", "");
-			originator.setState(argument, 0.0, "asin");
+			ComputeTrigonometricalOperation("atan", "");
+			originator.setState(argument, 0.0, "atan");
 			careTaker.add(originator.saveStateToMemento());
 		} 
 	}
