@@ -17,8 +17,7 @@ public class Main extends Application {
 	public void start(final Stage primaryStage) {
 		try {
 			primaryStage.initStyle(StageStyle.TRANSPARENT);// For transparency
-			Parent root = FXMLLoader.load(getClass().getResource(
-					"Calculator2.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("Calculator2.fxml"));
 
 			Scene scene = new Scene(root, 630, 500);
 			primaryStage.setScene(scene);

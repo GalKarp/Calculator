@@ -10,7 +10,7 @@
   <children>
     <Pane fx:id="textPane" layoutX="4.0" layoutY="30.0" prefHeight="98.0" prefWidth="617.0">
       <children>
-        <TextField fx:id="mainText" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="4.0" layoutY="36.0" onAction="#mainTextEnterPressed" prefHeight="34.0" prefWidth="609.0" />
+        <TextField fx:id="mainText" alignment="CENTER_RIGHT" editable="false" focusTraversable="false" layoutX="4.0" layoutY="36.0" prefHeight="34.0" prefWidth="609.0" />
         <Label fx:id="secondText" alignment="CENTER_RIGHT" layoutX="13.0" layoutY="14.0" prefHeight="20.0" prefWidth="598.0" text="" />
       </children>
     </Pane>
