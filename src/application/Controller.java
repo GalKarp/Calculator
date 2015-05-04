@@ -3,9 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javax.script.ScriptException;
-
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXML;
@@ -13,60 +11,49 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Controller{
+	//############################ Variables ############################//
 	private static Stage prevStage;
-	private static double sceneW;
-	
+	private static double sceneW;	
 	private double arg1 = 0;
 	private double arg2 = 1;
 	private double results = 0;
 	private double memory;
 	private double trigFactor = 0.017453292519943295;// DEG to RAD
-	
 	private int decimals = 2;
-	
 	private boolean actionPerformed = false;	
 	private boolean flag = false;
 	private boolean percentPressed = false;
 	private boolean expPressed = false;
-	private boolean firstFunction = true;
-	
+	private boolean firstFunction = true;	
 	private String operator = "+", MEMORY = "";
 	private String DRGStatus = "degrees";
 	private Originator originator = new Originator();
 	private CareTaker careTaker = new CareTaker();
-	
+	//#########################	javaFX variables#########################//
 	@FXML
 	private AnchorPane AnchorPane;
-	
 	@FXML
 	private ResourceBundle resources;
-	
 	@FXML
 	private URL location;
-	
 	@FXML
 	private Label M, secondText;
-	
 	@FXML
 	private RadioButton deg;
-	
 	@FXML
 	private TextField mainText;
-	
 	@FXML
 	private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9,
 	btnPunct, ACBtn, CBtn, divide, egal, minus, multiply, plus, numInv,
 	MPlus, MRBtn, plusMinus, DRGBtn, PIBtn, InvBtn, sinBtn, cosBtn,
 	tanBtn, lnBtn, factorialBtn, squareBtn, sqrtBtn, powBtn,
 	radicalBtn, closeBtn;
-	
 	@FXML
 	private Label calc;
-	
+	//#####################################################################//
 	@FXML
 	void ACBtnHandler(ActionEvent event) {
 		reset();
@@ -76,7 +63,7 @@ public class Controller{
 	void CBtnHandler(ActionEvent event) {
 		mainText.setText("");
 	}
-	
+	//Calculator Keys 0-9
 	@FXML
 	void btn0Handler(ActionEvent event) {
 		if (actionPerformed) {
@@ -88,52 +75,43 @@ public class Controller{
 			mainText.setText(mainText.getText() + "0");
 		}
 	}
-
 	@FXML
 	void btn1Handler(ActionEvent event) {
 		NumericalBottonHandle(btn1);
 	}
-
 	@FXML
 	void btn2Handler(ActionEvent event) {
 		NumericalBottonHandle(btn2);
 	}
-
 	@FXML
 	void btn3Handler(ActionEvent event) {
 		NumericalBottonHandle(btn3);
 	}
-
 	@FXML
 	void btn4Handler(ActionEvent event) {
 		NumericalBottonHandle(btn4);
 	}
-
 	@FXML
 	void btn5Handler(ActionEvent event) {
 		NumericalBottonHandle(btn5);
 	}
-
 	@FXML
 	void btn6Handler(ActionEvent event) {
 		NumericalBottonHandle(btn6);
 	}
-
 	@FXML
 	void btn7Handler(ActionEvent event) {
 		NumericalBottonHandle(btn7);
 	}
-
 	@FXML
 	void btn8Handler(ActionEvent event) {
 		NumericalBottonHandle(btn8);
 	}
-
 	@FXML
 	void btn9Handler(ActionEvent event) {
 		NumericalBottonHandle(btn9);
 	}
-
+	
 	@FXML
 	void divideHandler(ActionEvent event) {
 		secondText.setText(mainText.getText() + " / ");
@@ -213,6 +191,7 @@ public class Controller{
 				}
 			}
 			else {
+				//Limit very big numbers
 				secondText.setText("argument should be an integ between 3 and 23 !");
 			}
 		}
@@ -395,11 +374,6 @@ public class Controller{
 		if (!MEMORY.equals("")) {
 			mainText.setText(MEMORY);
 		}
-	}
-
-	@FXML
-	void DRGBtnHandler(ActionEvent event) {
-
 	}
 	
 	@FXML
@@ -603,6 +577,7 @@ public class Controller{
 	
 	@FXML
 	void undoBtnHandler(ActionEvent event) throws ScriptException {
+		if(careTaker.getPrev() != null){
 		originator.getStateFromMemento(careTaker.getPrev());
 		arg1= originator.getFirstNumber();
 		arg2= originator.getSecondNumber();
@@ -612,19 +587,16 @@ public class Controller{
 		secondText.setText("");
 		if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
 			
-		     mainText.setText(operator + "(" + arg1 + ")");
-			
-			
+		     mainText.setText(operator + "(" + arg1 + ")");		
 		}
 		else{
     mainText.setText(arg1 + operator + arg2);
     
 		}
-
 		flag=true;
-
+		
+		}
 	}
-
 	// INITIALIZE
 	@FXML
 	void initialize() {
@@ -634,22 +606,11 @@ public class Controller{
 			System.out.println("anchor pane focused");
 		}
 	}
-	
-	@FXML
-	void mainTextEnterPressed(ActionEvent event) {
-		// egalPressed();
-		// System.out.println("equal din maintext");
-	}
-
-	// END OF Keyboard input
-
 	// CLOSE BUTTON
 	@FXML
 	void closeBtnHandler(ActionEvent event) {
 		System.exit(0);
-	}
-
-	// END CLOSE
+	}// END CLOSE
 
 	public void computeOperation() {
 		if (!mainText.getText().equals("")) {
@@ -678,7 +639,7 @@ public class Controller{
 		secondText.setText("");
 		arg1 = arg2 = 0;
 		actionPerformed = false;
-		M.setText("");
+
 	}
 
 	public int getNumberOfDigits(double zz) {
@@ -696,15 +657,6 @@ public class Controller{
 		}
 		actionPerformed = false;
 		mainText.setText(mainText.getText() + btn.getText());
-	}
-
-	public void NumericalBottonHandle(KeyEvent ke) {// FOR KEYS
-		if (actionPerformed) {
-			mainText.setText("");
-			secondText.setText("");
-		}
-		actionPerformed = false;
-		mainText.setText(mainText.getText() + ke.getText());
 	}
 
 	public void ComputeTrigonometricalOperation(String status, String drgStatus) {
@@ -762,17 +714,106 @@ public class Controller{
 							careTaker.add(originator.saveStateToMemento());
 						}
 						else {
-							if (-1 <= argument && 1 >= argument) {
-								results = Math.acos(argument);
-								ComputeTrigonometricalOperation("acos", "");
-								originator.setState(argument, 0.0, "acos");
-								careTaker.add(originator.saveStateToMemento());
+								if (-1 <= argument && 1 >= argument) {
+									if(DRGStatus.equals("degrees")) {
+										results = Math.toDegrees(Math.acos(Math.sin(argument)));
+										System.out.println("deg");
+									}
+									else if(DRGStatus.equals("grads"))
+									{
+										System.out.println("grd");
+										argument = Math.toDegrees(argument);
+										results = Math.cos(Math.PI * argument / 200);
+										results = Math.toDegrees(Math.acos(results));					
+									}
+									else {
+										results = Math.acos(argument);
+										System.out.println("rad");
+									}
+									ComputeTrigonometricalOperation("acos", "");
+									originator.setState(argument, 0.0, "acos");
+									careTaker.add(originator.saveStateToMemento());
+								} 
+								else {
+									secondText.setText("argument must be between -1 and 1");
+								}
+						}
+					}
 
+					secondText.setText("cos(" + argument + ")");
+				}
+				else if(splitString[0].equals("sin")){
+					double argument = 0;
+					if (!mainText.getText().isEmpty()) {
+						argument = Double.parseDouble(splitString[1]);
+						if (firstFunction) {
+							results = Math.sin(trigFactor * argument);
+							ComputeTrigonometricalOperation("sin", DRGStatus);
+							originator.setState(argument, 0.0, "sin");
+							careTaker.add(originator.saveStateToMemento());
+						}
+						else {
+							if (-1 <= argument && 1 >= argument) {
+								if(DRGStatus.equals("degrees")) {
+									results = Math.toDegrees(Math.asin(argument));
+									System.out.println("deg");
+								}
+								else if(DRGStatus.equals("grads"))
+								{
+									argument = Math.toDegrees(argument);
+									results = Math.sin(Math.PI * argument / 200);
+									results = Math.toDegrees(Math.asin(results));
+									System.out.println("grd");
+								}
+								else {
+									results = Math.asin(argument);
+									System.out.println("rad");
+								}
+								ComputeTrigonometricalOperation("asin", "");
+								originator.setState(argument, 0.0, "asin");
+								careTaker.add(originator.saveStateToMemento());
 							} 
 							else {
 								secondText.setText("argument must be between -1 and 1");
 							}
 						}
+																																								
+					}
+
+					secondText.setText("sin(" + argument + ")");
+				}
+				else if(splitString[0].equals("tan")){
+					double argument = 0;
+					if (!mainText.getText().isEmpty()) {
+						argument = Double.parseDouble(splitString[1]);
+						if (firstFunction) {
+							results = Math.tan(trigFactor * argument);
+							ComputeTrigonometricalOperation("tan", DRGStatus);
+							originator.setState(argument, 0.0, "tan");
+							careTaker.add(originator.saveStateToMemento());
+						}
+						else {
+							if (-1 <= argument && 1 >= argument) {
+								if(DRGStatus.equals("degrees")) {
+									results = Math.toDegrees(Math.atan(argument));
+									System.out.println("deg");
+								}
+								else if(DRGStatus.equals("grads"))
+								{
+									argument = Math.toDegrees(argument);
+									results = Math.tan(Math.PI * argument / 200);
+									results = Math.toDegrees(Math.atan(results));
+								}
+								else {
+									results = Math.atan(argument);
+									System.out.println("rad");
+								}
+								ComputeTrigonometricalOperation("atan", "");
+								originator.setState(argument, 0.0, "atan");
+								careTaker.add(originator.saveStateToMemento());
+							} 															
+						}
+																																								
 					}
 
 					secondText.setText("cos(" + argument + ")");
@@ -882,22 +923,22 @@ public class Controller{
 		sceneW=width;
 
 	}
-
+	
 	public static void setPrimaryScene(Stage primaryStage) {
 
 		prevStage=primaryStage;
 	}
-	
+	//Change screen size
 	@FXML
 	void onRegular(ActionEvent event) throws IOException {
 		prevStage.setWidth(prevStage.getWidth()-318);
 		closeBtn.setLayoutX(280);
 		calc.setLayoutX(150);
 		mainText.setPrefWidth(300);
-		secondText.setPrefWidth(300);
+		secondText.setPrefWidth(280);
 
 	}
-	
+	//Change screen size
 	@FXML
 	void onScientific(ActionEvent event) throws IOException {
 		prevStage.setWidth(sceneW);
@@ -907,6 +948,7 @@ public class Controller{
 		secondText.setPrefWidth(598);
 
 	}
+	
 
 }
 
