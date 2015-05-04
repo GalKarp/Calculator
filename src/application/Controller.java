@@ -375,26 +375,49 @@ public class Controller{
 		if (!((mainText.getText().equals("0")) || (mainText.getText()
 				.equals("")))) {
 			MEMORY = mainText.getText();
-			M.setText("Memorie: " + MEMORY);
+			secondText.setText("Memorie: " + MEMORY);
 			actionPerformed = true;
 		} 
 		else {
 			secondText.setText("");
-			M.setText("");
 			MEMORY = "";
+		}
+	}
+	
+	@FXML
+	void MMinusBtnHandler(ActionEvent event) {
+		if (!((mainText.getText().equals("0")) || (mainText.getText()
+				.equals("")))) {
+			secondText.setText("");
+			MEMORY = "";
+			actionPerformed = true;
+		} 
+		else {
+			System.out.println("else");
+		}
+	}
+	
+	@FXML
+	void MRBtnHandler(ActionEvent event) {
+		if (!MEMORY.equals("")) {
+			mainText.setText(MEMORY);
+			arg2 = Double.parseDouble(MEMORY);
+			mainText.setText(""+arg2);
+		}
+	}
+	
+	@FXML
+	void MSBtnHandler(ActionEvent event) {
+		if (!mainText.equals("")) {
+			arg2 = Double.parseDouble(mainText.getText());
+			MEMORY = "" + arg2;
+			mainText.setText("");
 		}
 	}
 	
 	@FXML
 	void PIBtnHandler(ActionEvent event) {
 		mainText.setText(String.format("%.8f", Math.PI));
-	}
-
-	@FXML
-	void MRBtnHandler(ActionEvent event) {
-		if (!MEMORY.equals("")) {
-			mainText.setText(MEMORY);
-		}
 	}
 
 	@FXML

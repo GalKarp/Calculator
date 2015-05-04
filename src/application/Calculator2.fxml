@@ -85,8 +85,8 @@
       
       
       <Button id="btn9" fx:id="MRBtn1" focusTraversable="false" layoutX="15.0" layoutY="131.0" mnemonicParsing="false" onAction="#MRBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MC" />
-      <Button id="btn9" fx:id="MRBtn2" focusTraversable="false" layoutX="137.0" layoutY="130.0" mnemonicParsing="false" onAction="#MRBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MS" />
-      <Button id="btn9" fx:id="MPlus1" focusTraversable="false" layoutX="257.0" layoutY="128.0" mnemonicParsing="false" onAction="#MPlusBtnHandler" prefHeight="50.0" prefWidth="50.0" text="M-" />
+      <Button id="btn9" fx:id="MRBtn2" focusTraversable="false" layoutX="137.0" layoutY="130.0" mnemonicParsing="false" onAction="#MSBtnHandler" prefHeight="50.0" prefWidth="50.0" text="MS" />
+      <Button id="btn9" fx:id="MPlus1" focusTraversable="false" layoutX="257.0" layoutY="128.0" mnemonicParsing="false" onAction="#MMinusBtnHandler" prefHeight="50.0" prefWidth="50.0" text="M-" />
       <Button layoutX="447.0" layoutY="193.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="112.0" text="Redo" onAction="#redoBtnHandler" />
   </children>
 </AnchorPane>
