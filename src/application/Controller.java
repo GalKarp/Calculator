@@ -21,6 +21,7 @@ public class Controller{
 	private double arg2 = 1;
 	private double results = 0;
 	private double memory;
+	private boolean nan = false;
 	private double trigFactor = 0.017453292519943295;// DEG to RAD
 	private int decimals = 2;
 	private boolean actionPerformed = false;	
@@ -170,8 +171,12 @@ public class Controller{
 	@FXML
 	void percentBtnHandler(ActionEvent event) {
 		if ((!mainText.getText().isEmpty()) && (arg2 != 0)) {
+//			secondText.setText(mainText.getText() + " % ");
+//			operator = "%";
+//			computeOperation();
 			percentPressed = true;
 		}
+
 	}
 	
 	@FXML
@@ -581,6 +586,7 @@ public class Controller{
 	
 	@FXML
 	void redoBtnHandler(ActionEvent event) {
+		if(careTaker.getIndex()-1 != 0){
 		originator.getStateFromMemento(careTaker.getNext());
 		arg1= originator.getFirstNumber();
 		arg2= originator.getSecondNumber();
@@ -596,11 +602,12 @@ public class Controller{
 			mainText.setText(arg1 + operator + arg2);
 		}
 		flag=true;
+		}
 	}
 	
 	@FXML
 	void undoBtnHandler(ActionEvent event) throws ScriptException {
-		if(careTaker.getPrev() != null){
+		if(careTaker.getIndex() > 0){
 		originator.getStateFromMemento(careTaker.getPrev());
 		arg1= originator.getFirstNumber();
 		arg2= originator.getSecondNumber();
@@ -639,6 +646,7 @@ public class Controller{
 		if (!mainText.getText().equals("")) {
 			memory = Double.parseDouble(mainText.getText());
 			arg1 = Double.parseDouble(mainText.getText());
+			System.out.println("hello");
 			System.out.println(memory);
 				
 			System.out.println(arg1);
@@ -660,7 +668,10 @@ public class Controller{
 	public void reset() {
 		mainText.setText("");
 		secondText.setText("");
+		memory = 0;
 		arg1 = arg2 = 0;
+		results = 0;
+		careTaker.emptyList();
 		actionPerformed = false;
 
 	}
@@ -875,6 +886,7 @@ public class Controller{
 				}
 				if (arg2 == 0) {
 					results = 0;
+					nan = true;
 				} 
 				else {
 					results = arg1 / arg2;
@@ -908,15 +920,17 @@ public class Controller{
 			}
 
 			if (operator.equals("yroot")) {
-				if(arg2 == 0)
+				arg2 = Double.parseDouble(mainText.getText());
+				if(arg2 != 0)
 				{
-					arg2 = 1.0 / arg1;
+					arg1 = 1.0 / arg1;
 				}
-				else {
-					arg2 = 1.0 / arg2;
-				}
-				System.out.println("arg2 = " + arg2);
-				results = Math.pow(arg1, arg2);
+//				else {
+//					arg2 = 1.0 / arg2;
+//				}
+				results = Math.pow(arg2, arg1);
+				arg1 = 1/arg1;
+				secondText.setText(arg1 + " yroot " + arg2 );
 			}
 			
 			if (operator.equals("3root")) {
@@ -933,7 +947,13 @@ public class Controller{
 
 			originator.setState(arg1, arg2, operator);
 			careTaker.add(originator.saveStateToMemento());
+			if( nan == false){
 			mainText.setText(String.format(("%." + decimals + "f"), results));
+			}
+			else{
+				mainText.setText("Math Error");
+				nan = false;
+			}
 
 			actionPerformed = true;
 		} catch (Exception e) {
