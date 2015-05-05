@@ -13,7 +13,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
+
+
 public class Controller{
+	public enum trigFunctions {
+	    SIN, COS, TAN, ASIN,
+	    ACOS, ATAN
+	}
 	//############################ Variables ############################//
 	private static Stage prevStage;
 	private static double sceneW;	
@@ -594,8 +601,7 @@ public class Controller{
 		mainText.setEditable(true);
 		secondText.setText("");
 
-		if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
-
+		if(operator.indexOf(trigFunctions.values().toString()) != -1){
 			mainText.setText(operator + "(" + arg1 + ")");
 		}
 		else{
@@ -615,7 +621,7 @@ public class Controller{
 		//equalPressed();
 		mainText.setEditable(true);
 		secondText.setText("");
-		if(operator.equals("cos") || operator.equals("sin") || operator.equals("tan") || operator.equals("acos") || operator.equals("asin") || operator.equals("atan")){
+		if(operator.indexOf(trigFunctions.values().toString()) != -1){
 			
 		     mainText.setText(operator + "(" + arg1 + ")");		
 		}
