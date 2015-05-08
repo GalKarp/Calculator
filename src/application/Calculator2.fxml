@@ -60,7 +60,7 @@
       <Button id="powBtn" fx:id="squareBtn11" focusTraversable="false" layoutX="508.0" layoutY="430.0" mnemonicParsing="false" onAction="#logBtnHandler" prefHeight="50.0" prefWidth="50.0" text="log" />
       <Button id="powBtn" fx:id="factorialBtn1" focusTraversable="false" layoutX="568.0" layoutY="310.0" mnemonicParsing="false" onAction="#XsqrtYBtnHandler" prefHeight="50.0" prefWidth="50.0" text="y√x" />
       <Button id="powBtn" fx:id="factorialBtn11" focusTraversable="false" layoutX="568.0" layoutY="369.0" mnemonicParsing="false" onAction="#Xsqrt3BtnHandler" prefHeight="50.0" prefWidth="50.0" text="3√x" />
-      <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#tenSquareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="x^10" />
+      <Button id="powBtn" fx:id="squareBtn12" focusTraversable="false" layoutX="568.0" layoutY="429.0" mnemonicParsing="false" onAction="#tenSquareBtnHandler" prefHeight="50.0" prefWidth="50.0" text="10^x" />
       <Button id="trigBtn" fx:id="tanBtn2" focusTraversable="false" layoutX="380.0" layoutY="369.0" mnemonicParsing="false" onAction="#atanBtnHandler" prefHeight="50.0" prefWidth="58.0" text="tan^-1" />
       <Button id="trigBtn" fx:id="cosBtn1" focusTraversable="false" layoutX="379.0" layoutY="309.0" mnemonicParsing="false" onAction="#acosBtnHandler" prefHeight="50.0" prefWidth="58.0" text="cos^-1" />
       <Button id="trigBtn" fx:id="cosBtn11" focusTraversable="false" layoutX="378.0" layoutY="251.0" mnemonicParsing="false" onAction="#asinBtnHandler" prefHeight="50.0" prefWidth="58.0" text="sin^-1" />

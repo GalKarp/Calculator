@@ -178,12 +178,11 @@ public class Controller{
 	@FXML
 	void percentBtnHandler(ActionEvent event) {
 		if ((!mainText.getText().isEmpty()) && (arg2 != 0)) {
+				percentPressed = true;
 //			secondText.setText(mainText.getText() + " % ");
 //			operator = "%";
-//			computeOperation();
-			percentPressed = true;
+//			computeOperation();	
 		}
-
 	}
 	
 	@FXML
@@ -651,11 +650,7 @@ public class Controller{
 	public void computeOperation() {
 		if (!mainText.getText().equals("")) {
 			memory = Double.parseDouble(mainText.getText());
-			arg1 = Double.parseDouble(mainText.getText());
-			System.out.println("hello");
-			System.out.println(memory);
-				
-			System.out.println(arg1);
+			arg1 = Double.parseDouble(mainText.getText());				
 			mainText.setText("");
 		} 
 		else {
@@ -961,6 +956,7 @@ public class Controller{
 				nan = false;
 			}
 
+			percentPressed = false;
 			actionPerformed = true;
 		} catch (Exception e) {
 			e.printStackTrace();
