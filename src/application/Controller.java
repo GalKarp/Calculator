@@ -938,6 +938,7 @@ public class Controller{
 				arg2 = 1.0 / 3.0;
 				System.out.println("arg2 = " + arg2);
 				results = Math.pow(arg1, arg2);
+				secondText.setText(" 3root " + arg1 );
 			}
 
 			if (operator.equals("rad")) {
